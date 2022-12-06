@@ -87,5 +87,6 @@ resource "google_notebooks_instance" "vertex_instance" {
 
   provisioner "local-exec" {
     command = "while [[ ${self.state} != 'Active' ]]; do echo ${self.state}; sleep 15; done"
+    interpreter = ["bash", "-c"]
   }
 }
