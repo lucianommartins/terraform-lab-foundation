@@ -86,7 +86,7 @@ resource "google_notebooks_instance" "vertex_instance" {
   depends_on = [google_project_service.notebooks-api]
 
   provisioner "local-exec" {
-    command = "while [[ ${self.state} != 'Active' ]]; do echo ${self.state}; sleep 15; done"
+    command = "while [[ ${self.state} == 'PROVISIONING' ]]; do echo ${self.state}; sleep 15; done"
     interpreter = ["bash", "-c"]
   }
 }
