@@ -84,4 +84,8 @@ resource "google_notebooks_instance" "vertex_instance" {
   post_startup_script = var.vai_post_startup_script
 
   depends_on = [google_project_service.notebooks-api]
+
+  provisioner "local-exec" {
+    command = "while [[ ${self.state} == 'provisioning' ]]; do echo ${self.state}; sleep 15; done"
+  }
 }
